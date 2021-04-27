@@ -2424,18 +2424,22 @@ var Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme'
 };
+localStorage.setItem('theme', JSON.stringify(Theme));
+var getThemeItems = localStorage.getItem('theme');
+var themeItems = JSON.parse(getThemeItems); //document.body.classList.add(themeItems.LIGHT);
 
 function checkboxState() {
-  localStorage.setItem('theme', JSON.stringify(Theme));
-  var getThemeItems = localStorage.getItem('theme');
-  var themeItems = JSON.parse(getThemeItems);
-
-  if (this.checked === true) {
+  if (this.checked) {
     document.body.classList.add(themeItems.DARK);
     document.body.classList.remove(themeItems.LIGHT);
   } else {
     document.body.classList.add(themeItems.LIGHT);
     document.body.classList.remove(themeItems.DARK);
+  }
+
+  if (document.body.classList.contains(themeItems.DARK)) {
+    document.body.classList.remove(themeItems.LIGHT);
+    refs.themeSwitch.setAttribute('checked', 'true');
   }
 }
 
@@ -2468,7 +2472,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55657" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49172" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
